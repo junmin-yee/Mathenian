@@ -4,8 +4,12 @@
              x:Class="Mathenian.Views.MainPage"
              Title="{Binding Title}">
 
-    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand">
-        <Label Text="Welcome to Xamarin Forms and Prism!" />
+    <StackLayout HorizontalOptions="CenterAndExpand" VerticalOptions="StartAndExpand">
+        <Button Text="Arithmetic"
+                CornerRadius="40"
+                HeightRequest="80"
+                WidthRequest="80"
+                Command="{Binding NavigateCommand}"/>
     </StackLayout>
 
 </ContentPage>
