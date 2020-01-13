@@ -22,7 +22,7 @@
         <Editor AutoSize="TextChanges"
                 Grid.Row="1"
                 Grid.Column="0"/>
-        <Button Text="Accept"
+        <Button Text="Check"
                 BackgroundColor="Green"
                 Grid.Row="2"
                 Grid.Column="0"/>
