@@ -15,14 +15,17 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-        <Label Text="1+2"
+        <Label Text="{Binding CurrentQuestion}"
                FontSize="Large"
                Grid.Row="0"
                Grid.Column="0"/>
-        <Editor AutoSize="TextChanges"
+        <Editor Text="{Binding AnswerInput}"
+                AutoSize="TextChanges"
                 Grid.Row="1"
                 Grid.Column="0"/>
-        <Button Text="Check"
+        <Button x:Name="AnswerButton"
+                Text="Check"
+                Command="{Binding NavigateCommand}"
                 BackgroundColor="Green"
                 Grid.Row="2"
                 Grid.Column="0"/>
