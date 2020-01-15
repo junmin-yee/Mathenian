@@ -37,7 +37,7 @@ namespace Mathenian.ViewModels
 
         async void ExecuteNavigateCommand()
         {
-            await _navigationService.NavigateAsync("MainPage");
+            await _navigationService.GoBackToRootAsync();
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)

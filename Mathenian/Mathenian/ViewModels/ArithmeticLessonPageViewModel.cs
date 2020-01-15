@@ -9,6 +9,8 @@ namespace Mathenian.ViewModels
 {
     public class ArithmeticLessonPageViewModel : BindableBase
     {
+        private static readonly Random random = new Random();
+        private static readonly object syncLock = new object();
         private static readonly string[] QuestionTemplates = { "{0} + {1}", "{0} - {1}", "{0} * {1}", "{0} / {1}" };
         private const int NumQuestions = 10;
 
@@ -97,24 +99,26 @@ namespace Mathenian.ViewModels
 
         private Tuple<string, string> GenerateQuestion()
         {
-            var rand = new Random();
-            int firstValue = rand.Next(1, 11);
-            int secondValue = rand.Next(1, 11);
-            switch (rand.Next(4))
+            lock (syncLock)
             {
-                case 0:
-                    return Tuple.Create(string.Format(QuestionTemplates[0], firstValue, secondValue),
-                        (firstValue + secondValue).ToString());
-                case 1:
-                    return Tuple.Create(string.Format(QuestionTemplates[1], firstValue, secondValue),
-                        (firstValue - secondValue).ToString());
-                case 2:
-                    return Tuple.Create(string.Format(QuestionTemplates[2], firstValue, secondValue),
-                        (firstValue * secondValue).ToString());
-                case 3:
-                    firstValue = secondValue * rand.Next(1, 11);
-                    return Tuple.Create(string.Format(QuestionTemplates[3], firstValue, secondValue),
-                        (firstValue / secondValue).ToString());
+                int firstValue = random.Next(1, 11);
+                int secondValue = random.Next(1, 11);
+                switch (random.Next(4))
+                {
+                    case 0:
+                        return Tuple.Create(string.Format(QuestionTemplates[0], firstValue, secondValue),
+                            (firstValue + secondValue).ToString());
+                    case 1:
+                        return Tuple.Create(string.Format(QuestionTemplates[1], firstValue, secondValue),
+                            (firstValue - secondValue).ToString());
+                    case 2:
+                        return Tuple.Create(string.Format(QuestionTemplates[2], firstValue, secondValue),
+                            (firstValue * secondValue).ToString());
+                    case 3:
+                        firstValue = secondValue * random.Next(1, 11);
+                        return Tuple.Create(string.Format(QuestionTemplates[3], firstValue, secondValue),
+                            (firstValue / secondValue).ToString());
+                }
             }
             throw new ArithmeticException();
         }
