@@ -1,0 +1,122 @@
+Arithmetic
+	{0} + {1}
+	{0} - {1}
+	{0} * {1}
+	{0} / {1}
+
+	Bronze:
+		Numbers from 1 - 10 
+	Silver:
+		Numbers from -10 - 10 
+	Gold:
+		Fractions 
+	Diamond: 
+		Decimals
+
+Algebra
+	Bronze:
+		{0}x = {1}
+		{0}/x = {1}
+	Silver:
+		{0}x + {1} = {2}
+		{0}x - {1} = {2}x
+	Gold:
+		{0}x + {1} = {2}x + {3}
+	Diamond:
+		{0}({1}x + {2}) = {3}({4}x + {5})
+
+Geometry
+	Bronze:
+		Missing angles
+		Find length of side of triangle (Pythagoras theorem)
+	Silver:
+		Area of rectangle
+		Area of triangle
+		Area of circle
+	Gold:
+		Area of cube
+		Area of sphere
+		Area of cylinder
+	Diamond:
+		sin()
+		cos()
+		tan()
+
+Set Theory
+	Bronze:
+		Size of a set
+		Elements of a set
+	Silver:
+		Union
+		Intersection
+		Difference
+	Gold:
+		Subsets
+	Diamond:
+		Common sets (N, Z, Q, R, C)
+
+Sequences and Series
+	Bronze:
+		Arithmetic sequence
+	Silver:
+		Arithmetic series
+	Gold:
+		Geometric sequence
+	Diamond:
+		Geometric series
+
+Differential Calculus
+	Bronze:
+		f(x) = {0}
+		f(x) = {0}x
+		f(x) = e^{0}x
+	Silver:
+		f(x) = sin({0}x)
+		f(x) = cos({0}x)
+	Gold:
+		f(x) = {0}x^2 + {1}x + {2}
+		f(x) = {0}x^3 + {1}x^2 + {2}x + {3}
+	Diamond:
+		f(x) = 1/{0}x
+		f(x) = 1/{0}x^2
+
+Integral Calculus
+	Bronze:
+		f(x) = {0}
+		f(x) = {0}x
+		f(x) = e^{0}x
+	Silver:
+		f(x) = sin({0}x)
+		f(x) = cos({0}x)
+	Gold:
+		f(x) = {0}x^2 + {1}x + {2}
+		f(x) = {0}x^3 + {1}x^2 + {2}x + {3}
+	Diamond:
+		f(x) = 1/{0}x
+		f(x) = 1/{0}x^2
+
+Probability
+	Bronze:
+		Single coin toss
+		Single dice roll
+	Silver:
+		Multiple coin tosses
+		Multiple dice rolls
+	Gold:
+		Permutations
+		Combinations
+	Diamond:
+		Addition rule
+		Conditional probability
+
+Statistics
+	Bronze:
+		Median
+		Mode
+	Silver:
+		Mean 
+	Gold:
+		Range
+		Interquartile range
+	Diamond:
+		r correlation
