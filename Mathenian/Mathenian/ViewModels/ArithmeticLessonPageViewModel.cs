@@ -4,6 +4,7 @@ using Prism.Navigation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Xamarin.Forms;
 
 namespace Mathenian.ViewModels
 {
@@ -26,8 +27,6 @@ namespace Mathenian.ViewModels
         private int _questionIndex = 0;
         public int QuestionIndex { get => _questionIndex; set => _questionIndex = value; }
 
-        private string _currentQuestion;
-
         private int _numAnswersCorrect;
         public int NumAnswersCorrect { get => _numAnswersCorrect; set => _numAnswersCorrect = value; }
 
@@ -42,6 +41,7 @@ namespace Mathenian.ViewModels
             }
         }
 
+        private string _currentQuestion;
         public string CurrentQuestion
         {
             get => _currentQuestion;
@@ -49,6 +49,18 @@ namespace Mathenian.ViewModels
             {
                 _currentQuestion = value;
                 RaisePropertyChanged("CurrentQuestion");
+            }
+        }
+
+        private Color[] colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
+                                               Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, };
+        public Color[] Colors
+        {
+            get => colors;
+            set
+            {
+                colors = value;
+                RaisePropertyChanged("Colors");
             }
         }
 
@@ -70,7 +82,14 @@ namespace Mathenian.ViewModels
         {
             if (AnswerSet[QuestionIndex].Equals(AnswerInput))
             {
+                Colors[QuestionIndex] = Color.LawnGreen;
+                Colors = Colors; // PLEASE MAKE MORE EFFICIENT, RAISE PROPERTY ON INDIVIDUAL UPDATE
                 ++NumAnswersCorrect;
+            }
+            else
+            {
+                Colors[QuestionIndex] = Color.Red;
+                Colors = Colors;
             }
 
             if (QuestionIndex < NumQuestions - 1)
