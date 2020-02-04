@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Mathenian.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -12,6 +13,9 @@ namespace Mathenian.ViewModels
     {
         private string _title;
         public string Title { get => _title; set => _title = value; }
+
+        private UserCompletion _userCompletion;
+        public UserCompletion UserCompletion { get => _userCompletion; set => _userCompletion = value; }
 
         private DelegateCommand _navigateCommand;
         private readonly INavigationService _navigationService;

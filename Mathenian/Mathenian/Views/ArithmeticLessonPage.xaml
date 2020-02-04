@@ -59,7 +59,8 @@
                    BackgroundColor="LightBlue"/>
         <ScrollView VerticalOptions="EndAndExpand">
             <StackLayout VerticalOptions="Fill">
-                <Entry Text="{Binding AnswerInput}"/>
+                <Entry Text="{Binding AnswerInput}"
+                       ReturnCommand="{Binding NavigateCommand}"/>
                 <Button x:Name="AnswerButton"
                     Text="Check"
                     Command="{Binding NavigateCommand}"
