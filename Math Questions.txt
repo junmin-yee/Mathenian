@@ -7,11 +7,11 @@ Arithmetic
 	Bronze:
 		Numbers from 1 - 10 
 	Silver:
-		Numbers from -10 - 10 
+		Numbers from -10 - -1
 	Gold:
-		Fractions 
-	Diamond: 
 		Decimals
+	Diamond: 
+		Fractions 
 
 Algebra
 	Bronze:

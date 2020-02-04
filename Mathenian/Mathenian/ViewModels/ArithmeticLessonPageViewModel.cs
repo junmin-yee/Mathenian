@@ -1,4 +1,5 @@
-﻿using Prism.Commands;
+﻿using Mathenian.Models;
+using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
 using System;
@@ -10,9 +11,6 @@ namespace Mathenian.ViewModels
 {
     public class ArithmeticLessonPageViewModel : BindableBase
     {
-        private static readonly Random random = new Random();
-        private static readonly object syncLock = new object();
-        private static readonly string[] QuestionTemplates = { "{0} + {1}", "{0} - {1}", "{0} * {1}", "{0} / {1}" };
         private const int NumQuestions = 10;
 
         private string _title;
@@ -74,7 +72,13 @@ namespace Mathenian.ViewModels
         {
             Title = "Arithmetic Lesson";
             _navigationService = navigationService;
-            GenerateQuestionSet();
+
+            var factory = new QuestionSet().ExecuteCreate(Topic.Arithmetic, NumQuestions, Mastery.Bronze);
+
+            Tuple<string[], string[]> results = factory.GenerateQuestionSet();
+            QuestionSet = results.Item1;
+            AnswerSet = results.Item2;
+
             CurrentQuestion = QuestionSet[0];
         }
 
@@ -104,42 +108,6 @@ namespace Mathenian.ViewModels
 
                 await _navigationService.NavigateAsync("ArithmeticResultsPage", parameters);
             }
-        }
-
-        private void GenerateQuestionSet()
-        {
-            for (int i = 0; i < NumQuestions; ++i)
-            {
-                Tuple<string, string> result = GenerateQuestion();
-                _questionSet[i] = result.Item1;
-                _answerSet[i] = result.Item2;
-            }
-        }
-
-        private Tuple<string, string> GenerateQuestion()
-        {
-            lock (syncLock)
-            {
-                int firstValue = random.Next(1, 11);
-                int secondValue = random.Next(1, 11);
-                switch (random.Next(4))
-                {
-                    case 0:
-                        return Tuple.Create(string.Format(QuestionTemplates[0], firstValue, secondValue),
-                            (firstValue + secondValue).ToString());
-                    case 1:
-                        return Tuple.Create(string.Format(QuestionTemplates[1], firstValue, secondValue),
-                            (firstValue - secondValue).ToString());
-                    case 2:
-                        return Tuple.Create(string.Format(QuestionTemplates[2], firstValue, secondValue),
-                            (firstValue * secondValue).ToString());
-                    case 3:
-                        firstValue = secondValue * random.Next(1, 11);
-                        return Tuple.Create(string.Format(QuestionTemplates[3], firstValue, secondValue),
-                            (firstValue / secondValue).ToString());
-                }
-            }
-            throw new ArithmeticException();
         }
     }
 }
