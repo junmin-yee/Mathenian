@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Mathenian.Views.ArithmeticLessonPage"
+             x:Class="Mathenian.Views.LessonPage"
              Title="{Binding Title}">
 
     <StackLayout>
@@ -61,10 +61,9 @@
             <StackLayout VerticalOptions="Fill">
                 <Entry Text="{Binding AnswerInput}"
                        ReturnCommand="{Binding NavigateCommand}"/>
-                <Button x:Name="AnswerButton"
-                    Text="Check"
-                    Command="{Binding NavigateCommand}"
-                    BackgroundColor="Green"/>
+                <Button Text="Check"
+                        Command="{Binding NavigateCommand}"
+                        BackgroundColor="Green"/>
             </StackLayout>
         </ScrollView>
     </StackLayout>

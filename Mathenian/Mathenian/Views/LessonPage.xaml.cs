@@ -4,9 +4,9 @@ using Xamarin.Forms;
 
 namespace Mathenian.Views
 {
-    public partial class ArithmeticLessonPage : ContentPage
+    public partial class LessonPage : ContentPage
     {
-        public ArithmeticLessonPage()
+        public LessonPage()
         {
             InitializeComponent();
         }

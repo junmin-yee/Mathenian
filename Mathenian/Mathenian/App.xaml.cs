@@ -30,8 +30,8 @@ namespace Mathenian
         {
             containerRegistry.RegisterForNavigation<NavigationPage>();
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
-            containerRegistry.RegisterForNavigation<ArithmeticLessonPage, ArithmeticLessonPageViewModel>();
-            containerRegistry.RegisterForNavigation<ArithmeticResultsPage, ArithmeticResultsPageViewModel>();
+            containerRegistry.RegisterForNavigation<LessonPage, LessonPageViewModel>();
+            containerRegistry.RegisterForNavigation<ResultsPage, ResultsPageViewModel>();
         }
     }
 }

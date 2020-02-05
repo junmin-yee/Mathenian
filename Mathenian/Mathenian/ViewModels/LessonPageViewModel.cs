@@ -9,7 +9,7 @@ using Xamarin.Forms;
 
 namespace Mathenian.ViewModels
 {
-    public class ArithmeticLessonPageViewModel : BindableBase
+    public class LessonPageViewModel : BindableBase, INavigationAware
     {
         private const int NumQuestions = 10;
 
@@ -34,8 +34,7 @@ namespace Mathenian.ViewModels
             get => _answerInput;
             set
             {
-                _answerInput = value;
-                RaisePropertyChanged("AnswerInput");
+                SetProperty(ref _answerInput, value);
             }
         }
 
@@ -45,10 +44,12 @@ namespace Mathenian.ViewModels
             get => _currentQuestion;
             set
             {
-                _currentQuestion = value;
-                RaisePropertyChanged("CurrentQuestion");
+                SetProperty(ref _currentQuestion, value);
             }
         }
+
+        private Topic _topic;
+        private Mastery _mastery;
 
         private Color[] colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
                                                Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, };
@@ -62,24 +63,14 @@ namespace Mathenian.ViewModels
             }
         }
 
-        private DelegateCommand _navigateCommand;
+        public DelegateCommand NavigateCommand { get; private set; }
         private readonly INavigationService _navigationService;
 
-        public DelegateCommand NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand(ExecuteNavigateCommand));
-
-        public ArithmeticLessonPageViewModel(INavigationService navigationService)
+        public LessonPageViewModel(INavigationService navigationService)
         {
             Title = "Arithmetic Lesson";
             _navigationService = navigationService;
-
-            var factory = new QuestionSet().ExecuteCreate(Topic.Arithmetic, NumQuestions, Mastery.Bronze);
-
-            Tuple<string[], string[]> results = factory.GenerateQuestionSet();
-            QuestionSet = results.Item1;
-            AnswerSet = results.Item2;
-
-            CurrentQuestion = QuestionSet[0];
+            NavigateCommand = new DelegateCommand(ExecuteNavigateCommand);
         }
 
         async void ExecuteNavigateCommand()
@@ -105,9 +96,28 @@ namespace Mathenian.ViewModels
             {
                 var parameters = new NavigationParameters();
                 parameters.Add("NumCorrect", NumAnswersCorrect);
+                parameters.Add("NumQuestions", NumQuestions);
+                parameters.Add("Topic", _topic);
 
-                await _navigationService.NavigateAsync("ArithmeticResultsPage", parameters);
+                await _navigationService.NavigateAsync("ResultsPage", parameters);
             }
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        { }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            _topic = parameters.GetValue<Topic>("Topic");
+            _mastery = parameters.GetValue<Mastery>("Mastery");
+
+            var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);
+
+            Tuple<string[], string[]> results = factory.GenerateQuestionSet();
+            QuestionSet = results.Item1;
+            AnswerSet = results.Item2;
+
+            CurrentQuestion = QuestionSet[0];
         }
     }
 }

@@ -1,21 +1,47 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Text;
+using System.Threading;
 
 namespace Mathenian.Models
 {
-    public class LessonCompletion
+    public class LessonCompletion : INotifyPropertyChanged
     {
         private const int MaxPercent = 100;
 
         private Mastery _mastery;
-        public Mastery Mastery { get => _mastery; set => _mastery = value; }
+        public Mastery Mastery
+        {
+            get => _mastery;
+            set
+            {
+                _mastery = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private int _percentCompleted;
-        public int PercentCompleted { get => _percentCompleted; set => _percentCompleted = value; }
+        public int PercentCompleted
+        {
+            get => _percentCompleted;
+            set
+            {
+                _percentCompleted = value;
+                RaisePropertyChanged();
+            }
+        }
 
         private bool _enabled;
+
         public bool Enabled { get => _enabled; set => _enabled = value; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        private void RaisePropertyChanged([CallerMemberName]string propertyName = "")
+        {
+            Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
 
         public LessonCompletion()
         {
@@ -27,7 +53,7 @@ namespace Mathenian.Models
         public void Update(int percent)
         {
             _percentCompleted += percent;
-            if (_percentCompleted > MaxPercent)
+            if (_percentCompleted >= MaxPercent)
             {
                 switch (_mastery)
                 {

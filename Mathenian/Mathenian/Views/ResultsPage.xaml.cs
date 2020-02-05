@@ -2,9 +2,9 @@
 
 namespace Mathenian.Views
 {
-    public partial class ArithmeticResultsPage : ContentPage
+    public partial class ResultsPage : ContentPage
     {
-        public ArithmeticResultsPage()
+        public ResultsPage()
         {
             InitializeComponent();
         }

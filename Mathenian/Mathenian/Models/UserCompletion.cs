@@ -7,10 +7,11 @@ namespace Mathenian.Models
     public class UserCompletion
     {
         private Dictionary<Topic, LessonCompletion> _lessons;
+        public Dictionary<Topic, LessonCompletion> Lessons { get => _lessons; set => _lessons = value; }
 
         public UserCompletion()
         {
-            _lessons = new Dictionary<Topic, LessonCompletion>
+            Lessons = new Dictionary<Topic, LessonCompletion>
             {
                 { Topic.Arithmetic, new LessonCompletion() },
                 { Topic.Algebra, new LessonCompletion() },
@@ -22,40 +23,40 @@ namespace Mathenian.Models
                 { Topic.Probability, new LessonCompletion() },
                 { Topic.Statistics, new LessonCompletion() }
             };
-            _lessons[Topic.Arithmetic].Enabled = true;
+            Lessons[Topic.Arithmetic].Enabled = true;
         }
 
         public void Update(Topic topic, int percent)
         {
-            if (_lessons[topic].Enabled && !_lessons[topic].IsMastered())
+            if (Lessons[topic].Enabled && !Lessons[topic].IsMastered())
             {
-                _lessons[topic].Update(percent);
+                Lessons[topic].Update(percent);
 
-                if (_lessons[topic].IsCompleted())
+                if (Lessons[topic].IsCompleted())
                 {
                     switch(topic)
                     {
                         case Topic.Arithmetic:
-                            _lessons[Topic.Algebra].Enabled = true;
+                            Lessons[Topic.Algebra].Enabled = true;
                             break;
                         case Topic.Algebra:
-                            _lessons[Topic.Geometry].Enabled = true;
+                            Lessons[Topic.Geometry].Enabled = true;
                             break;
                         case Topic.Geometry:
-                            _lessons[Topic.Series].Enabled = true;
-                            _lessons[Topic.Sets].Enabled = true;
+                            Lessons[Topic.Series].Enabled = true;
+                            Lessons[Topic.Sets].Enabled = true;
                             break;
                         case Topic.Series:
-                            _lessons[Topic.Differential].Enabled = true;
+                            Lessons[Topic.Differential].Enabled = true;
                             break;
                         case Topic.Differential:
-                            _lessons[Topic.Integral].Enabled = true;
+                            Lessons[Topic.Integral].Enabled = true;
                             break;
                         case Topic.Sets:
-                            _lessons[Topic.Probability].Enabled = true;
+                            Lessons[Topic.Probability].Enabled = true;
                             break;
                         case Topic.Probability:
-                            _lessons[Topic.Statistics].Enabled = true;
+                            Lessons[Topic.Statistics].Enabled = true;
                             break;
                         default:
                             break;

@@ -9,7 +9,7 @@ using System.Text;
 
 namespace Mathenian.ViewModels
 {
-    public class MainPageViewModel : BindableBase
+    public class MainPageViewModel : BindableBase, INavigationAware
     {
         private string _title;
         public string Title { get => _title; set => _title = value; }
@@ -17,21 +17,37 @@ namespace Mathenian.ViewModels
         private UserCompletion _userCompletion;
         public UserCompletion UserCompletion { get => _userCompletion; set => _userCompletion = value; }
 
-        private DelegateCommand _navigateCommand;
+        public DelegateCommand<string> NavigateCommand { get; private set; }
         private readonly INavigationService _navigationService;
-
-        public DelegateCommand NavigateCommand =>
-            _navigateCommand ?? (_navigateCommand = new DelegateCommand(ExecuteNavigateCommand));
 
         public MainPageViewModel(INavigationService navigationService)
         {
             Title = "Main Page";
             _navigationService = navigationService;
+
+            _userCompletion = new UserCompletion();
+
+            NavigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand);
         }
 
-        async void ExecuteNavigateCommand()
+        async void ExecuteNavigateCommand(string parameter)
         {
-            await _navigationService.NavigateAsync("ArithmeticLessonPage");
+            Topic topic;
+            Enum.TryParse(parameter, out topic);
+
+            var parameters = new NavigationParameters();
+            parameters.Add("Topic", topic);
+            parameters.Add("Mastery", UserCompletion.Lessons[topic].Mastery);
+
+            await _navigationService.NavigateAsync("LessonPage", parameters);
+        }
+
+        public void OnNavigatedFrom(INavigationParameters parameters)
+        { }
+
+        public void OnNavigatedTo(INavigationParameters parameters)
+        {
+            UserCompletion.Update(parameters.GetValue<Topic>("Topic"), parameters.GetValue<int>("PercentIncrease"));
         }
     }
 }
