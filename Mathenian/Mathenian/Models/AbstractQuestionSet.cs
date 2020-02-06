@@ -9,7 +9,7 @@ namespace Mathenian.Models
         Bronze,
         Silver,
         Gold,
-        Diamond
+        Platinum
     }
 
     public abstract class AbstractQuestionSet

@@ -55,6 +55,7 @@ namespace Mathenian.ViewModels
         {
             _numCorrect = parameters.GetValue<int>("NumCorrect");
             _topic = parameters.GetValue<Topic>("Topic");
+            Title = _topic.ToString() + " Results Page";
             Results = string.Format("{0} correct out of {1} questions", _numCorrect.ToString(), parameters.GetValue<int>("NumQuestions"));
         }
     }

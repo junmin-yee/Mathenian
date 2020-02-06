@@ -51,17 +51,9 @@ namespace Mathenian.ViewModels
         private Topic _topic;
         private Mastery _mastery;
 
-        private Color[] colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
+        private Color[] _colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
                                                Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, };
-        public Color[] Colors
-        {
-            get => colors;
-            set
-            {
-                colors = value;
-                RaisePropertyChanged("Colors");
-            }
-        }
+        public Color[] Colors { get => _colors; set => _colors = value; }
 
         public DelegateCommand NavigateCommand { get; private set; }
         private readonly INavigationService _navigationService;
@@ -78,14 +70,14 @@ namespace Mathenian.ViewModels
             if (AnswerSet[QuestionIndex].Equals(AnswerInput))
             {
                 Colors[QuestionIndex] = Color.LawnGreen;
-                Colors = Colors; // PLEASE MAKE MORE EFFICIENT, RAISE PROPERTY ON INDIVIDUAL UPDATE
                 ++NumAnswersCorrect;
             }
             else
             {
                 Colors[QuestionIndex] = Color.Red;
-                Colors = Colors;
             }
+
+            RaisePropertyChanged("Colors");
 
             if (QuestionIndex < NumQuestions - 1)
             {

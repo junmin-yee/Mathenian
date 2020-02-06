@@ -31,7 +31,7 @@ namespace Mathenian.Models
                         firstValue = random.Next(1, 4) / random.Next(1, 6);
                         secondValue = random.Next(1, 4) / random.Next(1, 6);
                         break;
-                    case Mastery.Diamond:
+                    case Mastery.Platinum:
                         firstValue = random.NextDouble();
                         secondValue = random.NextDouble();
                         break;

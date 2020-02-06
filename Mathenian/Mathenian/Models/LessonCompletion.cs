@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading;
+using Xamarin.Forms;
 
 namespace Mathenian.Models
 {
@@ -66,10 +67,10 @@ namespace Mathenian.Models
                         _percentCompleted = 0;
                         break;
                     case Mastery.Gold:
-                        _mastery = Mastery.Diamond;
+                        _mastery = Mastery.Platinum;
                         _percentCompleted = 0;
                         break;
-                    case Mastery.Diamond:
+                    case Mastery.Platinum:
                         _percentCompleted = MaxPercent;
                         break;
                 }
@@ -78,7 +79,7 @@ namespace Mathenian.Models
 
         public bool IsMastered()
         {
-            return _mastery == Mastery.Diamond && _percentCompleted == MaxPercent;
+            return _mastery == Mastery.Platinum && _percentCompleted == MaxPercent;
         }
 
         public bool IsCompleted()
