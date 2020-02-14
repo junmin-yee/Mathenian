@@ -13,4 +13,9 @@ namespace Mathenian.Models
     {
         public override AbstractQuestionSet Create(int numQuestions, Mastery mastery) => new ArithmeticQuestionSet(numQuestions, mastery);
     }
+
+    public class AlgebraFactory : QuestionSetFactory
+    {
+        public override AbstractQuestionSet Create(int numQuestions, Mastery mastery) => new AlgebraQuestionSet(numQuestions, mastery);
+    }
 }

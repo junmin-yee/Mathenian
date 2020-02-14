@@ -108,6 +108,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[1]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Algebra"/>
             <Button Text="Geometry"
                     Grid.Row="4"

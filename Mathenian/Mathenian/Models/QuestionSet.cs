@@ -25,7 +25,8 @@ namespace Mathenian.Models
         {
             _factories = new Dictionary<Topic, QuestionSetFactory>
             {
-                { Topic.Arithmetic, new ArithmeticFactory() }
+                { Topic.Arithmetic, new ArithmeticFactory() },
+                { Topic.Algebra, new AlgebraFactory() }
             };
         }
 

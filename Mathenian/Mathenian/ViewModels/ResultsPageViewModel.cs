@@ -43,7 +43,7 @@ namespace Mathenian.ViewModels
         {
             var parameters = new NavigationParameters();
             parameters.Add("Topic", _topic);
-            parameters.Add("PercentIncrease", _numCorrect * 2);
+            parameters.Add("PercentIncrease", _numCorrect * 10);
 
             await _navigationService.GoBackToRootAsync(parameters);
         }

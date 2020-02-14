@@ -60,7 +60,7 @@ namespace Mathenian.ViewModels
 
         public LessonPageViewModel(INavigationService navigationService)
         {
-            Title = "Arithmetic Lesson";
+            Title = "Lesson";
             _navigationService = navigationService;
             NavigateCommand = new DelegateCommand(ExecuteNavigateCommand);
         }
@@ -102,6 +102,7 @@ namespace Mathenian.ViewModels
         {
             _topic = parameters.GetValue<Topic>("Topic");
             _mastery = parameters.GetValue<Mastery>("Mastery");
+            Title = _topic.ToString() + " Lesson Page";
 
             var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);
 
