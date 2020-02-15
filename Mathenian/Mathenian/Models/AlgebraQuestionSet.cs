@@ -8,8 +8,8 @@ namespace Mathenian.Models
     {
         private static readonly string[] _questionTemplateBr = { "{0}x = {1}", "{0}/x = {1}" };
         private static readonly string _questionTemplateSi = "{0}x + {1} = {2}";
-        private static readonly string _questionTemplateGo = "{0}x + {1} = {2}x + {3}";
-        private static readonly string _questionTemplatePl = "{0}({1}x + {2}) = {3}({4}x + {5})";
+        //private static readonly string _questionTemplateGo = "{0}x + {1} = {2}x + {3}";
+        //private static readonly string _questionTemplatePl = "{0}({1}x + {2}) = {3}({4}x + {5})";
 
         public AlgebraQuestionSet(int numQuestions, Mastery mastery) : base(numQuestions, mastery)
         { }
