@@ -4,17 +4,15 @@ using Mathenian.ViewModels;
 using Mathenian.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using Mathenian.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Mathenian
 {
     public partial class App
     {
-        /* 
-         * The Xamarin Forms XAML Previewer in Visual Studio uses System.Activator.CreateInstance.
-         * This imposes a limitation in which the App class must have a default constructor. 
-         * App(IPlatformInitializer initializer = null) cannot be handled by the Activator.
-         */
+        static MathenianDatabase database;
+
         public App() : this(null) { }
 
         public App(IPlatformInitializer initializer) : base(initializer) { }
@@ -32,6 +30,18 @@ namespace Mathenian
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LessonPage, LessonPageViewModel>();
             containerRegistry.RegisterForNavigation<ResultsPage, ResultsPageViewModel>();
+        }
+
+        public static MathenianDatabase Database
+        {
+            get
+            {
+                if (database == null)
+                {
+                    database = new MathenianDatabase();
+                }
+                return database;
+            }
         }
     }
 }
