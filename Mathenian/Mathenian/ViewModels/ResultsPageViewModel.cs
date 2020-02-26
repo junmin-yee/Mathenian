@@ -11,7 +11,15 @@ namespace Mathenian.ViewModels
 	public class ResultsPageViewModel : BindableBase, INavigationAware
 	{
         private string _title;
-        public string Title { get => _title; set => _title = value; }
+        public string Title 
+        { 
+            get => _title;
+            set 
+            { 
+                _title = value;
+                RaisePropertyChanged("Title");
+            }
+        }
 
         private string _results;
         public string Results

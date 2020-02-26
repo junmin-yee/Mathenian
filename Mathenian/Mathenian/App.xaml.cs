@@ -21,7 +21,7 @@ namespace Mathenian
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/MainPage");
+            await NavigationService.NavigateAsync("NavigationPage/StartPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
@@ -30,6 +30,9 @@ namespace Mathenian
             containerRegistry.RegisterForNavigation<MainPage, MainPageViewModel>();
             containerRegistry.RegisterForNavigation<LessonPage, LessonPageViewModel>();
             containerRegistry.RegisterForNavigation<ResultsPage, ResultsPageViewModel>();
+            containerRegistry.RegisterForNavigation<StartPage, StartPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignUpPage, SignUpPageViewModel>();
+            containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
         }
 
         public static MathenianDatabase Database

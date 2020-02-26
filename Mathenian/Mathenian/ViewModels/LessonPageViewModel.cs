@@ -14,7 +14,15 @@ namespace Mathenian.ViewModels
         private const int NumQuestions = 10;
 
         private string _title;
-        public string Title { get => _title; set => _title = value; }
+        public string Title
+        {
+            get => _title;
+            set
+            {
+                _title = value;
+                RaisePropertyChanged("Title");
+            }
+        }
 
         private string[] _questionSet = new string[NumQuestions];
         public string[] QuestionSet { get => _questionSet; set => _questionSet = value; }
