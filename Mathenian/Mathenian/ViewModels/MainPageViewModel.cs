@@ -49,7 +49,8 @@ namespace Mathenian.ViewModels
             var parameters = new NavigationParameters
             {
                 { "Topic", topic },
-                { "Mastery", UserCompletion.Lessons[topic].Mastery }
+                { "Mastery", UserCompletion.Lessons[topic].Mastery },
+                { "Account", UserAccount }
             };
 
             await _navigationService.NavigateAsync("LessonPage", parameters);
@@ -67,20 +68,18 @@ namespace Mathenian.ViewModels
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            if (parameters.GetValue<bool>("IsSignIn"))
-            {
-                UserAccount = parameters.GetValue<Account>("Account");
-                UserCompletion.UpdateFromDatabase(UserAccount.Completion);
-                foreach(Topic topic in Enum.GetValues(typeof(Topic)))
-                {
-                    ButtonColors[(int)topic] = UpdateButtonColor(topic);
-                }
-            }
-            else
+            UserAccount = parameters.GetValue<Account>("Account");
+            UserCompletion.UpdateFromDatabase(UserAccount.Completion);
+
+            if (!parameters.GetValue<bool>("IsSignIn"))
             {
                 Topic topic = parameters.GetValue<Topic>("Topic");
                 UserCompletion.Update(topic, parameters.GetValue<int>("PercentIncrease"));
-                ButtonColors[(int)topic] = UpdateButtonColor(topic);                
+            }
+
+            foreach (Topic topic in Enum.GetValues(typeof(Topic)))
+            {
+                ButtonColors[(int)topic] = UpdateButtonColor(topic);
             }
             RaisePropertyChanged("ButtonColors");
         }

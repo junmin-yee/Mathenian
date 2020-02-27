@@ -58,6 +58,7 @@ namespace Mathenian.ViewModels
 
         private Topic _topic;
         private Mastery _mastery;
+        private Account _userAccount;
 
         private Color[] _colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
                                                Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, };
@@ -98,7 +99,8 @@ namespace Mathenian.ViewModels
                 {
                     { "NumCorrect", NumAnswersCorrect },
                     { "NumQuestions", NumQuestions },
-                    { "Topic", _topic }
+                    { "Topic", _topic },
+                    { "Account", _userAccount }
                 };
 
                 await _navigationService.NavigateAsync("ResultsPage", parameters);
@@ -112,6 +114,8 @@ namespace Mathenian.ViewModels
         {
             _topic = parameters.GetValue<Topic>("Topic");
             _mastery = parameters.GetValue<Mastery>("Mastery");
+            _userAccount = parameters.GetValue<Account>("Account");
+
             Title = _topic.ToString() + " Lesson Page";
 
             var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);

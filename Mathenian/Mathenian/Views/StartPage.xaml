@@ -5,8 +5,7 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mathenian.Views.StartPage">
     <StackLayout>
-        <Image Source="Mathenian Logo.png"
-               VerticalOptions="Fill"/>
+        <Image Source="mathenian.png"/>
         <Button Text="Sign Up"
                 Command="{Binding SignUpCommand}"/>
         <Button Text="Sign In"

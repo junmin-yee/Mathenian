@@ -81,10 +81,10 @@ namespace Mathenian.Models
         {
             string[] inputs = completion.Split(',');
 
-            for (int i = 0; i < inputs.Length - 1; i += 2)
+            for (int i = 0; i < Lessons.Count; ++i)
             {
-                Lessons[(Topic)i].Mastery = (Mastery)int.Parse(inputs[i]);
-                Lessons[(Topic)i].PercentCompleted = int.Parse(inputs[i + 1]);
+                Lessons[(Topic)i].Mastery = (Mastery)int.Parse(inputs[2 * i]);
+                Lessons[(Topic)i].PercentCompleted = int.Parse(inputs[2 * i + 1]);
             }
         }
     }

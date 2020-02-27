@@ -59,7 +59,7 @@ namespace Mathenian.ViewModels
                     { "IsSignIn", true }
                 };
 
-                await _navigationService.NavigateAsync("NavigationPage/MainPage", parameters);
+                await _navigationService.NavigateAsync("/MainPage", parameters);
             }
         }
 
