@@ -53,7 +53,7 @@ namespace Mathenian.ViewModels
                 { "Account", UserAccount }
             };
 
-            await _navigationService.NavigateAsync("LessonPage", parameters);
+            await _navigationService.NavigateAsync("IntroductionPage", parameters);
         }
 
         async void ExecuteSignOutCommand()

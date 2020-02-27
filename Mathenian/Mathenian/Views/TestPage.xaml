@@ -3,12 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
-             x:Class="Mathenian.Views.LessonPage"
-             Title="{Binding Title}">
-
+             x:Class="Mathenian.Views.TestPage">
     <StackLayout>
         <Grid>
             <Grid.RowDefinitions>
+                <RowDefinition Height="20"/>
                 <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
@@ -52,6 +51,36 @@
                          Grid.Column="8"/>
             <BoxView BackgroundColor="{Binding Colors[9]}"
                          Grid.Row="0"
+                         Grid.Column="9"/>
+            <BoxView BackgroundColor="{Binding Colors[10]}"
+                         Grid.Row="1"
+                         Grid.Column="0"/>
+            <BoxView BackgroundColor="{Binding Colors[11]}"
+                         Grid.Row="1"
+                         Grid.Column="1"/>
+            <BoxView BackgroundColor="{Binding Colors[12]}"
+                         Grid.Row="1"
+                         Grid.Column="2"/>
+            <BoxView BackgroundColor="{Binding Colors[13]}"
+                         Grid.Row="1"
+                         Grid.Column="3"/>
+            <BoxView BackgroundColor="{Binding Colors[14]}"
+                         Grid.Row="1"
+                         Grid.Column="4"/>
+            <BoxView BackgroundColor="{Binding Colors[15]}"
+                         Grid.Row="1"
+                         Grid.Column="5"/>
+            <BoxView BackgroundColor="{Binding Colors[16]}"
+                         Grid.Row="1"
+                         Grid.Column="6"/>
+            <BoxView BackgroundColor="{Binding Colors[17]}"
+                         Grid.Row="1"
+                         Grid.Column="7"/>
+            <BoxView BackgroundColor="{Binding Colors[18]}"
+                         Grid.Row="1"
+                         Grid.Column="8"/>
+            <BoxView BackgroundColor="{Binding Colors[19]}"
+                         Grid.Row="1"
                          Grid.Column="9"/>
         </Grid>
         <Label Text="{Binding CurrentQuestion}"
