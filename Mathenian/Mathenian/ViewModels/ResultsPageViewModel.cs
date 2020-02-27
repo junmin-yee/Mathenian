@@ -49,10 +49,12 @@ namespace Mathenian.ViewModels
 
         async void ExecuteNavigateCommand()
         {
-            var parameters = new NavigationParameters();
-            parameters.Add("Topic", _topic);
-            parameters.Add("PercentIncrease", _numCorrect * 10);
-
+            var parameters = new NavigationParameters
+            {
+                { "Topic", _topic },
+                { "PercentIncrease", _numCorrect * 10 },
+                { "IsSignIn", false }
+            };
             await _navigationService.GoBackToRootAsync(parameters);
         }
 

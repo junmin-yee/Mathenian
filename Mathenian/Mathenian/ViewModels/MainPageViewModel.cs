@@ -15,6 +15,9 @@ namespace Mathenian.ViewModels
         private string _title;
         public string Title { get => _title; set => _title = value; }
 
+        private Account _userAccount;
+        public Account UserAccount { get => _userAccount; set => _userAccount = value; }
+
         private UserCompletion _userCompletion;
         public UserCompletion UserCompletion { get => _userCompletion; set => _userCompletion = value; }
 
@@ -23,6 +26,7 @@ namespace Mathenian.ViewModels
         public Color[] ButtonColors { get => _buttonColors; set => _buttonColors = value; }
 
         public DelegateCommand<string> NavigateCommand { get; private set; }
+        public DelegateCommand SignOutCommand { get; private set; }
 
         private readonly INavigationService _navigationService;
 
@@ -32,20 +36,30 @@ namespace Mathenian.ViewModels
             _navigationService = navigationService;
 
             _userCompletion = new UserCompletion();
+            _userAccount = new Account();
 
             NavigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand);
+            SignOutCommand = new DelegateCommand(ExecuteSignOutCommand);
         }
 
         async void ExecuteNavigateCommand(string parameter)
         {
-            Topic topic;
-            Enum.TryParse(parameter, out topic);
+            Enum.TryParse(parameter, out Topic topic);
 
-            var parameters = new NavigationParameters();
-            parameters.Add("Topic", topic);
-            parameters.Add("Mastery", UserCompletion.Lessons[topic].Mastery);
+            var parameters = new NavigationParameters
+            {
+                { "Topic", topic },
+                { "Mastery", UserCompletion.Lessons[topic].Mastery }
+            };
 
             await _navigationService.NavigateAsync("LessonPage", parameters);
+        }
+
+        async void ExecuteSignOutCommand()
+        {
+            UserAccount.Completion = UserCompletion.GenerateForDatabase();
+            await App.Database.SaveItemAsync(UserAccount);
+            await _navigationService.NavigateAsync("/StartPage");
         }
 
         public void OnNavigatedFrom(INavigationParameters parameters)
@@ -53,22 +67,45 @@ namespace Mathenian.ViewModels
 
         public void OnNavigatedTo(INavigationParameters parameters)
         {
-            Topic topic = parameters.GetValue<Topic>("Topic");
-            UserCompletion.Update(topic, parameters.GetValue<int>("PercentIncrease"));
-
-            switch (UserCompletion.Lessons[topic].Mastery)
+            if (parameters.GetValue<bool>("IsSignIn"))
             {
-                case Mastery.Silver:
-                    ButtonColors[(int)topic] = Color.Brown;
-                    break;
-                case Mastery.Gold:
-                    ButtonColors[(int)topic] = Color.Silver;
-                    break;
-                case Mastery.Platinum:
-                    ButtonColors[(int)topic] = Color.SlateGray;
-                    break;
+                UserAccount = parameters.GetValue<Account>("Account");
+                UserCompletion.UpdateFromDatabase(UserAccount.Completion);
+                foreach(Topic topic in Enum.GetValues(typeof(Topic)))
+                {
+                    ButtonColors[(int)topic] = UpdateButtonColor(topic);
+                }
+            }
+            else
+            {
+                Topic topic = parameters.GetValue<Topic>("Topic");
+                UserCompletion.Update(topic, parameters.GetValue<int>("PercentIncrease"));
+                ButtonColors[(int)topic] = UpdateButtonColor(topic);                
             }
             RaisePropertyChanged("ButtonColors");
+        }
+
+        private Color UpdateButtonColor(Topic topic)
+        {
+            Color color = Color.LightBlue;
+            if (UserCompletion.Lessons[topic].IsMastered())
+                color = Color.SlateGray;
+            else
+            {
+                switch (UserCompletion.Lessons[topic].Mastery)
+                {
+                    case Mastery.Silver:
+                        color = Color.Brown;
+                        break;
+                    case Mastery.Gold:
+                        color =  Color.Silver;
+                        break;
+                    case Mastery.Platinum:
+                        color = Color.Gold;
+                        break;
+                }
+            }
+            return color;
         }
     }
 }

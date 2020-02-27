@@ -53,7 +53,7 @@ namespace Mathenian.ViewModels
             };
 
             await App.Database.SaveItemAsync(account);
-            await _navigationService.NavigateAsync("/MainPage");
+            await _navigationService.NavigateAsync("NavigationPage/MainPage");
         }
 
         private string Hash(string password)

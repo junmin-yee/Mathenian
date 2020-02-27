@@ -21,7 +21,7 @@ namespace Mathenian
         {
             InitializeComponent();
 
-            await NavigationService.NavigateAsync("NavigationPage/StartPage");
+            await NavigationService.NavigateAsync("/StartPage");
         }
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)

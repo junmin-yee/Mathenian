@@ -94,10 +94,12 @@ namespace Mathenian.ViewModels
             }
             else
             {
-                var parameters = new NavigationParameters();
-                parameters.Add("NumCorrect", NumAnswersCorrect);
-                parameters.Add("NumQuestions", NumQuestions);
-                parameters.Add("Topic", _topic);
+                var parameters = new NavigationParameters
+                {
+                    { "NumCorrect", NumAnswersCorrect },
+                    { "NumQuestions", NumQuestions },
+                    { "Topic", _topic }
+                };
 
                 await _navigationService.NavigateAsync("ResultsPage", parameters);
             }

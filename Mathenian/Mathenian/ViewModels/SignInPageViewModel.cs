@@ -52,7 +52,15 @@ namespace Mathenian.ViewModels
             if (account == null)
                 await _dialogService.DisplayAlertAsync("Warning", "Credentials do not match", "Ok");
             else
-                await _navigationService.NavigateAsync("/MainPage");
+            {
+                var parameters = new NavigationParameters
+                {
+                    { "Account", account },
+                    { "IsSignIn", true }
+                };
+
+                await _navigationService.NavigateAsync("NavigationPage/MainPage", parameters);
+            }
         }
 
         private string Hash(string password)

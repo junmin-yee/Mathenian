@@ -71,7 +71,7 @@ namespace Mathenian.Models
 
             foreach (KeyValuePair<Topic, LessonCompletion> entry in Lessons)
             {
-                completion = (int)entry.Value.Mastery + "," + entry.Value.PercentCompleted + ",";
+                completion += (int)entry.Value.Mastery + "," + entry.Value.PercentCompleted + ",";
             }
 
             return completion;
@@ -81,7 +81,7 @@ namespace Mathenian.Models
         {
             string[] inputs = completion.Split(',');
 
-            for (int i = 0; i < inputs.Length; i += 2)
+            for (int i = 0; i < inputs.Length - 1; i += 2)
             {
                 Lessons[(Topic)i].Mastery = (Mastery)int.Parse(inputs[i]);
                 Lessons[(Topic)i].PercentCompleted = int.Parse(inputs[i + 1]);
