@@ -17,11 +17,7 @@ namespace Mathenian.ViewModels
         public string Title
         {
             get => _title;
-            set
-            {
-                _title = value;
-                RaisePropertyChanged("Title");
-            }
+            set { SetProperty(ref _title, value); }
         }
 
         private string[] _questionSet = new string[NumQuestions];
@@ -40,20 +36,14 @@ namespace Mathenian.ViewModels
         public string AnswerInput
         {
             get => _answerInput;
-            set
-            {
-                SetProperty(ref _answerInput, value);
-            }
+            set { SetProperty(ref _answerInput, value); }
         }
 
         private string _currentQuestion;
         public string CurrentQuestion
         {
             get => _currentQuestion;
-            set
-            {
-                SetProperty(ref _currentQuestion, value);
-            }
+            set { SetProperty(ref _currentQuestion, value); }
         }
 
         private Topic _topic;

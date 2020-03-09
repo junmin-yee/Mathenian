@@ -14,11 +14,7 @@ namespace Mathenian.ViewModels
         public string IntroImageSource
         {
             get => _introImageSource;
-            set
-            {
-                _introImageSource = value;
-                RaisePropertyChanged("IntroImageSource");
-            }
+            set { SetProperty(ref _introImageSource, value); }
         }
 
         private Topic _topic;

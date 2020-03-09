@@ -14,22 +14,14 @@ namespace Mathenian.ViewModels
         public string Username 
         { 
             get => _username;
-            set
-            {
-                _username = value;
-                RaisePropertyChanged("Username");
-            }
+            set { SetProperty(ref _username, value); }
         }
 
         private string _password;
         public string Password
         {
             get => _password;
-            set
-            {
-                _password = value;
-                RaisePropertyChanged("Password");
-            }
+            set { SetProperty(ref _password, value); }
         }
 
         public DelegateCommand SubmitCommand { get; private set; }
@@ -53,7 +45,16 @@ namespace Mathenian.ViewModels
             };
 
             await App.Database.SaveItemAsync(account);
-            await _navigationService.NavigateAsync("/MainPage");
+
+            account = await App.Database.GetAccountByCredentialAsync(Username, Hash(Password));
+
+            var parameters = new NavigationParameters
+            {
+                { "Account", account },
+                { "IsSignIn", true }
+            };
+
+            await _navigationService.NavigateAsync("/MainPage", parameters);
         }
 
         private string Hash(string password)
