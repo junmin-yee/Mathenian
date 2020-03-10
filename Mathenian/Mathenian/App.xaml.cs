@@ -35,6 +35,7 @@ namespace Mathenian
             containerRegistry.RegisterForNavigation<SignInPage, SignInPageViewModel>();
             containerRegistry.RegisterForNavigation<IntroductionPage, IntroductionPageViewModel>();
             containerRegistry.RegisterForNavigation<TestPage, TestPageViewModel>();
+            containerRegistry.RegisterForNavigation<ProfilePage, ProfilePageViewModel>();
         }
 
         public static MathenianDatabase Database

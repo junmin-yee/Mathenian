@@ -8,41 +8,18 @@ using Xamarin.Forms;
 
 namespace Mathenian.Models
 {
-    public class LessonCompletion : INotifyPropertyChanged
+    public class LessonCompletion
     {
         private const int MaxPercent = 100;
 
         private Mastery _mastery;
-        public Mastery Mastery
-        {
-            get => _mastery;
-            set
-            {
-                _mastery = value;
-                RaisePropertyChanged();
-            }
-        }
+        public Mastery Mastery { get => _mastery; set => _mastery = value; }
 
         private int _percentCompleted;
-        public int PercentCompleted
-        {
-            get => _percentCompleted;
-            set
-            {
-                _percentCompleted = value;
-                RaisePropertyChanged();
-            }
-        }
+        public int PercentCompleted { get => _percentCompleted; set => _percentCompleted = value; }
 
         private bool _enabled;
-
         public bool Enabled { get => _enabled; set => _enabled = value; }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-        private void RaisePropertyChanged([CallerMemberName]string propertyName = "")
-        {
-            Volatile.Read(ref PropertyChanged)?.Invoke(this, new PropertyChangedEventArgs(propertyName));
-        }
 
         public LessonCompletion()
         {

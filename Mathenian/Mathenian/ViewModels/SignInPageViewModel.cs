@@ -45,10 +45,16 @@ namespace Mathenian.ViewModels
                 await _dialogService.DisplayAlertAsync("Warning", "Credentials do not match", "Ok");
             else
             {
+                if (account.LastLoggedIn.AddDays(1).Date == DateTime.Now.Date)
+                    account.DailyStreak += 1;
+                else if (account.LastLoggedIn.Date != DateTime.Now.Date)
+                    account.DailyStreak = 0;
+                account.LastLoggedIn = DateTime.Now;
+
                 var parameters = new NavigationParameters
                 {
                     { "Account", account },
-                    { "IsSignIn", true }
+                    { "IsResult", false }
                 };
 
                 await _navigationService.NavigateAsync("/MainPage", parameters);

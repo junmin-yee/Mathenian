@@ -26,6 +26,10 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="60"/>
             </Grid.ColumnDefinitions>
+            <Button Text="Profile"
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    Command="{Binding ProfileCommand}"/>
             <Button Text="Sign Out"
                     Grid.Row="0"
                     Grid.Column="4"

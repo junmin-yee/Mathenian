@@ -46,7 +46,7 @@ namespace Mathenian.ViewModels
             {
                 { "Topic", _topic },
                 { "PercentIncrease", _numCorrect * 10 },
-                { "IsSignIn", false },
+                { "IsResult", true },
                 { "Account", _userAccount }
             };
             await _navigationService.NavigateAsync("/MainPage", parameters);
@@ -59,9 +59,14 @@ namespace Mathenian.ViewModels
         {
             _numCorrect = parameters.GetValue<int>("NumCorrect");
             _topic = parameters.GetValue<Topic>("Topic");
+            int numQuestions = parameters.GetValue<int>("NumQuestions");
+
             _userAccount = parameters.GetValue<Account>("Account");
+            _userAccount.TotalQuestionsAttempted += numQuestions;
+            _userAccount.TotalQuestionsCompleted += _numCorrect;
+
             Title = _topic.ToString() + " Results Page";
-            Results = string.Format("{0} correct out of {1} questions", _numCorrect.ToString(), parameters.GetValue<int>("NumQuestions"));
+            Results = string.Format("{0} correct out of {1} questions", _numCorrect, numQuestions);
         }
     }
 }

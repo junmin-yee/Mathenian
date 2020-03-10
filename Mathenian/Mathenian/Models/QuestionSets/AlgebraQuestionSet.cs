@@ -31,7 +31,7 @@ namespace Mathenian.Models
                                         (secondValue / firstValue).ToString());
                                 case 1:
                                     return Tuple.Create(string.Format(_questionTemplateBr[1], secondValue, firstValue),
-                                        (firstValue / secondValue).ToString());
+                                        (secondValue / firstValue).ToString());
                             }
                             break;
                         }

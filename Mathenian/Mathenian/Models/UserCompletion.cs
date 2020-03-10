@@ -32,36 +32,7 @@ namespace Mathenian.Models
             {
                 Lessons[topic].Update(percent);
 
-                if (Lessons[topic].IsCompleted())
-                {
-                    switch(topic)
-                    {
-                        case Topic.Arithmetic:
-                            Lessons[Topic.Algebra].Enabled = true;
-                            break;
-                        case Topic.Algebra:
-                            Lessons[Topic.Geometry].Enabled = true;
-                            break;
-                        case Topic.Geometry:
-                            Lessons[Topic.Series].Enabled = true;
-                            Lessons[Topic.Sets].Enabled = true;
-                            break;
-                        case Topic.Series:
-                            Lessons[Topic.Differential].Enabled = true;
-                            break;
-                        case Topic.Differential:
-                            Lessons[Topic.Integral].Enabled = true;
-                            break;
-                        case Topic.Sets:
-                            Lessons[Topic.Probability].Enabled = true;
-                            break;
-                        case Topic.Probability:
-                            Lessons[Topic.Statistics].Enabled = true;
-                            break;
-                        default:
-                            break;
-                    }
-                }
+                UpdateEnabled(topic);
             }
         }
 
@@ -85,6 +56,41 @@ namespace Mathenian.Models
             {
                 Lessons[(Topic)i].Mastery = (Mastery)int.Parse(inputs[2 * i]);
                 Lessons[(Topic)i].PercentCompleted = int.Parse(inputs[2 * i + 1]);
+                UpdateEnabled((Topic)i);
+            }
+        }
+
+        private void UpdateEnabled(Topic topic)
+        {
+            if (Lessons[topic].IsCompleted())
+            {
+                switch (topic)
+                {
+                    case Topic.Arithmetic:
+                        Lessons[Topic.Algebra].Enabled = true;
+                        break;
+                    case Topic.Algebra:
+                        Lessons[Topic.Geometry].Enabled = true;
+                        break;
+                    case Topic.Geometry:
+                        Lessons[Topic.Series].Enabled = true;
+                        Lessons[Topic.Sets].Enabled = true;
+                        break;
+                    case Topic.Series:
+                        Lessons[Topic.Differential].Enabled = true;
+                        break;
+                    case Topic.Differential:
+                        Lessons[Topic.Integral].Enabled = true;
+                        break;
+                    case Topic.Sets:
+                        Lessons[Topic.Probability].Enabled = true;
+                        break;
+                    case Topic.Probability:
+                        Lessons[Topic.Statistics].Enabled = true;
+                        break;
+                    default:
+                        break;
+                }
             }
         }
     }

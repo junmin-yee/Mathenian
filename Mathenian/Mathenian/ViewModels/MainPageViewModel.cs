@@ -27,6 +27,7 @@ namespace Mathenian.ViewModels
 
         public DelegateCommand<string> NavigateCommand { get; private set; }
         public DelegateCommand SignOutCommand { get; private set; }
+        public DelegateCommand ProfileCommand { get; private set; }
 
         private readonly INavigationService _navigationService;
 
@@ -40,6 +41,7 @@ namespace Mathenian.ViewModels
 
             NavigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand);
             SignOutCommand = new DelegateCommand(ExecuteSignOutCommand);
+            ProfileCommand = new DelegateCommand(ExecuteProfileCommand);
         }
 
         async void ExecuteNavigateCommand(string parameter)
@@ -63,6 +65,16 @@ namespace Mathenian.ViewModels
             await _navigationService.NavigateAsync("/StartPage");
         }
 
+        async void ExecuteProfileCommand()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "Account", UserAccount }
+            };
+
+            await _navigationService.NavigateAsync("ProfilePage", parameters);
+        }
+
         public void OnNavigatedFrom(INavigationParameters parameters)
         { }
 
@@ -71,10 +83,11 @@ namespace Mathenian.ViewModels
             UserAccount = parameters.GetValue<Account>("Account");
             UserCompletion.UpdateFromDatabase(UserAccount.Completion);
 
-            if (!parameters.GetValue<bool>("IsSignIn"))
+            if (parameters.GetValue<bool>("IsResult"))
             {
                 Topic topic = parameters.GetValue<Topic>("Topic");
                 UserCompletion.Update(topic, parameters.GetValue<int>("PercentIncrease"));
+                UserAccount.Completion = UserCompletion.GenerateForDatabase();
             }
 
             foreach (Topic topic in Enum.GetValues(typeof(Topic)))

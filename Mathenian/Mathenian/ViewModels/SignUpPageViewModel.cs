@@ -41,7 +41,12 @@ namespace Mathenian.ViewModels
             {
                 Username = Username,
                 Password = Hash(Password),
-                Completion = userCompletion.GenerateForDatabase()
+                Completion = userCompletion.GenerateForDatabase(),
+                TotalQuestionsCompleted = 0,
+                TotalQuestionsAttempted = 0,
+                DailyStreak = 0,
+                LastLoggedIn = DateTime.Now,
+                IsDarkMode = 0
             };
 
             await App.Database.SaveItemAsync(account);
@@ -51,7 +56,7 @@ namespace Mathenian.ViewModels
             var parameters = new NavigationParameters
             {
                 { "Account", account },
-                { "IsSignIn", true }
+                { "IsResult", false }
             };
 
             await _navigationService.NavigateAsync("/MainPage", parameters);

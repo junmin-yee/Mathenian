@@ -37,20 +37,14 @@ namespace Mathenian.ViewModels
         public string AnswerInput
         {
             get => _answerInput;
-            set
-            {
-                SetProperty(ref _answerInput, value);
-            }
+            set { SetProperty(ref _answerInput, value); }
         }
 
         private string _currentQuestion;
         public string CurrentQuestion
         {
             get => _currentQuestion;
-            set
-            {
-                SetProperty(ref _currentQuestion, value);
-            }
+            set { SetProperty(ref _currentQuestion, value); }
         }
 
         private Topic _topic;
@@ -128,7 +122,7 @@ namespace Mathenian.ViewModels
             _mastery = parameters.GetValue<Mastery>("Mastery");
             _userAccount = parameters.GetValue<Account>("Account");
 
-            Title = _topic.ToString() + " Lesson Page";
+            Title = _topic.ToString() + " Test Page";
 
             var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);
 
