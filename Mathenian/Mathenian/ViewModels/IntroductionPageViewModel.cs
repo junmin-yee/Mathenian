@@ -34,7 +34,6 @@ namespace Mathenian.ViewModels
             _navigationService = navigationService;
             _theme = App.Theme;
 
-            IntroImageSource = "mathenian.png"; // Placeholder
             LessonCommand = new DelegateCommand(ExecuteLessonCommand);
             TestCommand = new DelegateCommand(ExecuteTestCommand);
         }
@@ -71,6 +70,7 @@ namespace Mathenian.ViewModels
             _topic = parameters.GetValue<Topic>("Topic");
             _mastery = parameters.GetValue<Mastery>("Mastery");
             _userAccount = parameters.GetValue<Account>("Account");
+            IntroImageSource = string.Format("{0}.png", _topic.ToString().ToLower());
         }
     }
 }

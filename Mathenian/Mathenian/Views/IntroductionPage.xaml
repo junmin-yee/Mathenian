@@ -5,7 +5,8 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mathenian.Views.IntroductionPage">
     <StackLayout BackgroundColor="{Binding Theme.BackgroundColor}">
-        <Image Source="{Binding IntroImageSource}"/>
+        <Image Source="{Binding IntroImageSource}"
+               HorizontalOptions="Center"/>
         <Button Text="Practice"
                 Command="{Binding LessonCommand}"/>
         <Button Text="Test Out"
