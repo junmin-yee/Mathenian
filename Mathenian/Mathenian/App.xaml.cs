@@ -12,6 +12,7 @@ namespace Mathenian
     public partial class App
     {
         static MathenianDatabase database;
+        static Theme theme;
 
         public App() : this(null) { }
 
@@ -47,6 +48,18 @@ namespace Mathenian
                     database = new MathenianDatabase();
                 }
                 return database;
+            }
+        }
+
+        public static Theme Theme
+        {
+            get
+            {
+                if (theme == null)
+                {
+                    theme = new Theme();
+                }
+                return theme;
             }
         }
     }

@@ -25,6 +25,9 @@ namespace Mathenian.ViewModels
                                         Color.LightBlue, Color.LightBlue, Color.LightBlue, Color.LightBlue, Color.LightBlue };
         public Color[] ButtonColors { get => _buttonColors; set => _buttonColors = value; }
 
+        private Theme _theme;
+        public Theme Theme { get => _theme; set => _theme = value; }
+
         public DelegateCommand<string> NavigateCommand { get; private set; }
         public DelegateCommand SignOutCommand { get; private set; }
         public DelegateCommand ProfileCommand { get; private set; }
@@ -38,6 +41,7 @@ namespace Mathenian.ViewModels
 
             _userCompletion = new UserCompletion();
             _userAccount = new Account();
+            Theme = App.Theme;
 
             NavigateCommand = new DelegateCommand<string>(ExecuteNavigateCommand);
             SignOutCommand = new DelegateCommand(ExecuteSignOutCommand);

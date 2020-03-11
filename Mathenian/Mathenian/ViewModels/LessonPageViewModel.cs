@@ -46,6 +46,9 @@ namespace Mathenian.ViewModels
             set { SetProperty(ref _currentQuestion, value); }
         }
 
+        private Theme _theme;
+        public Theme Theme { get => _theme; set => _theme = value; }
+
         private Topic _topic;
         private Mastery _mastery;
         private Account _userAccount;
@@ -61,6 +64,7 @@ namespace Mathenian.ViewModels
         {
             Title = "Lesson";
             _navigationService = navigationService;
+            _theme = App.Theme;
             NavigateCommand = new DelegateCommand(ExecuteNavigateCommand);
         }
 

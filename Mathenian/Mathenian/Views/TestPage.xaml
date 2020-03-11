@@ -4,7 +4,7 @@
              xmlns:prism="http://prismlibrary.com"
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mathenian.Views.TestPage">
-    <StackLayout>
+    <StackLayout BackgroundColor="{Binding Theme.BackgroundColor}">
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="20"/>
@@ -87,6 +87,8 @@
                FontSize="Large"
                BackgroundColor="LightBlue"/>
         <Entry Text="{Binding AnswerInput}"
+               BackgroundColor="{Binding Theme.BackgroundColor}"
+               TextColor="{Binding Theme.TextColor}"
                ReturnCommand="{Binding NavigateCommand}"
                VerticalOptions="EndAndExpand"/>
         <Button Text="Check"

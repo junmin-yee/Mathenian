@@ -50,6 +50,7 @@ namespace Mathenian.ViewModels
                 else if (account.LastLoggedIn.Date != DateTime.Now.Date)
                     account.DailyStreak = 0;
                 account.LastLoggedIn = DateTime.Now;
+                App.Theme.UpdateTheme(account.IsDarkMode);
 
                 var parameters = new NavigationParameters
                 {

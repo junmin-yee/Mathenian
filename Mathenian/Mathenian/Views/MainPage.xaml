@@ -5,7 +5,7 @@
              Title="{Binding Title}">
 
     <ScrollView>
-        <Grid>
+        <Grid BackgroundColor="{Binding Theme.BackgroundColor}">
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"/>
                 <RowDefinition Height="40"/>

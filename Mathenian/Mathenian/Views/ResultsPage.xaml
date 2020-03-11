@@ -5,9 +5,11 @@
              prism:ViewModelLocator.AutowireViewModel="True"
              x:Class="Mathenian.Views.ResultsPage"
              Title="{Binding Title}">
-    <StackLayout HorizontalOptions="CenterAndExpand"
+    <StackLayout BackgroundColor="{Binding Theme.BackgroundColor}"
+                 HorizontalOptions="CenterAndExpand"
                  VerticalOptions="CenterAndExpand">
         <Label Text="{Binding Results}"
+               TextColor="{Binding Theme.TextColor}"
                FontSize="Large"/>
         <Button Text="Accept"
                 BackgroundColor="LawnGreen"

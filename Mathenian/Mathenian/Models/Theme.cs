@@ -16,6 +16,9 @@ namespace Mathenian.Models
         public static readonly Color TextColorDark = Color.White;
         public static readonly Color BackgroundColorDark = Color.FromRgb(23, 23, 23);
 
+        private int _type;
+        public int Type { get => _type; set => _type = value; }
+
         private Color _textColor;
         public Color TextColor { get => _textColor; set { SetProperty(ref _textColor, value); } }
 
@@ -24,8 +27,9 @@ namespace Mathenian.Models
 
         public Theme()
         {
-            _textColor = TextColorLight;
-            _backgroundColor = BackgroundColorLight;
+            TextColor = TextColorLight;
+            BackgroundColor = BackgroundColorLight;
+            _type = 0;
         }
 
         public Theme(int theme)
@@ -45,6 +49,7 @@ namespace Mathenian.Models
                 TextColor = TextColorDark;
                 BackgroundColor = BackgroundColorDark;
             }
+            _type = theme;
         }
     }
 }

@@ -24,6 +24,9 @@ namespace Mathenian.ViewModels
             set { SetProperty(ref _results, value); }
         }
 
+        private Theme _theme;
+        public Theme Theme { get => _theme; set => _theme = value; }
+
         private int _numCorrect;
         private Topic _topic;
         private Account _userAccount;
@@ -36,6 +39,7 @@ namespace Mathenian.ViewModels
         {
             Title = "Results Page";
             _navigationService = navigationService;
+            _theme = App.Theme;
 
             NavigateCommand = new DelegateCommand(ExecuteNavigateCommand);
         }

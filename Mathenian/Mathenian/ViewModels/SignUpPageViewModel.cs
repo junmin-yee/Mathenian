@@ -52,6 +52,7 @@ namespace Mathenian.ViewModels
             await App.Database.SaveItemAsync(account);
 
             account = await App.Database.GetAccountByCredentialAsync(Username, Hash(Password));
+            App.Theme.UpdateTheme(0);
 
             var parameters = new NavigationParameters
             {
