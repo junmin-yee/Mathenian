@@ -58,6 +58,7 @@ namespace Mathenian.ViewModels
         public Color[] Colors { get => _colors; set => _colors = value; }
 
         public DelegateCommand NavigateCommand { get; private set; }
+        public DelegateCommand QuitCommand { get; private set; }
         private readonly INavigationService _navigationService;
 
         public LessonPageViewModel(INavigationService navigationService)
@@ -66,6 +67,7 @@ namespace Mathenian.ViewModels
             _navigationService = navigationService;
             _theme = App.Theme;
             NavigateCommand = new DelegateCommand(ExecuteNavigateCommand);
+            QuitCommand = new DelegateCommand(ExecuteQuitCommand);
         }
 
         async void ExecuteNavigateCommand()
@@ -101,6 +103,16 @@ namespace Mathenian.ViewModels
             }
         }
 
+        async void ExecuteQuitCommand()
+        {
+            var parameters = new NavigationParameters
+            {
+                { "IsResult", false },
+                { "Account", _userAccount }
+            };
+            await _navigationService.NavigateAsync("/MainPage", parameters);
+        }
+
         public void OnNavigatedFrom(INavigationParameters parameters)
         { }
 
@@ -110,7 +122,7 @@ namespace Mathenian.ViewModels
             _mastery = parameters.GetValue<Mastery>("Mastery");
             _userAccount = parameters.GetValue<Account>("Account");
 
-            Title = _topic.ToString() + " Lesson Page";
+            Title = string.Format("{0} {1} Lesson", _topic.ToString(), _mastery.ToString());
 
             var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);
 
