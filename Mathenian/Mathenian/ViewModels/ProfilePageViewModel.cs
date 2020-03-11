@@ -26,8 +26,19 @@ namespace Mathenian.ViewModels
         public bool IsDarkMode 
         { 
             get => _isDarkMode;
-            set { SetProperty(ref _isDarkMode, value); }
+            set 
+            { 
+                SetProperty(ref _isDarkMode, value);
+                if ((_userAccount.IsDarkMode != 0) != value)
+                {
+                    _userAccount.IsDarkMode = value ? 1 : 0;
+                    _theme.UpdateTheme(_userAccount.IsDarkMode);
+                }
+            }
         }
+
+        private Theme _theme;
+        public Theme Theme { get => _theme; set => _theme = value; }
 
         private Account _userAccount;
 
@@ -43,6 +54,7 @@ namespace Mathenian.ViewModels
             _accuracy = "";
             _dailyStreak = "";
             _isDarkMode = false;
+            _theme = new Theme();
         }
 
         async void ExecuteNavigateCommand()
@@ -67,6 +79,7 @@ namespace Mathenian.ViewModels
             Accuracy = string.Format("Percent Correct: {0:0%}", accuracy);
             DailyStreak = string.Format("Daily Streak: {0}", _userAccount.DailyStreak);
             IsDarkMode = _userAccount.IsDarkMode != 0;
+            Theme.UpdateTheme(_userAccount.IsDarkMode);
         }
     }
 }
