@@ -27,9 +27,11 @@ namespace Mathenian.ViewModels
         private Theme _theme;
         public Theme Theme { get => _theme; set => _theme = value; }
 
+        private int _numQuestions;
         private int _numCorrect;
         private Topic _topic;
         private Account _userAccount;
+        private Score _score;
 
         public DelegateCommand NavigateCommand { get; private set; }
         
@@ -46,6 +48,13 @@ namespace Mathenian.ViewModels
 
         async void ExecuteNavigateCommand()
         {
+            if (_score != null)
+            {
+                _score.TotalCorrect += _numCorrect;
+                _score.TotalAttempt += _numQuestions;
+                await App.Database.SaveScoreAsync(_score);
+            }
+
             var parameters = new NavigationParameters
             {
                 { "Topic", _topic },
@@ -63,14 +72,16 @@ namespace Mathenian.ViewModels
         {
             _numCorrect = parameters.GetValue<int>("NumCorrect");
             _topic = parameters.GetValue<Topic>("Topic");
-            int numQuestions = parameters.GetValue<int>("NumQuestions");
+            _numQuestions = parameters.GetValue<int>("NumQuestions");
 
             _userAccount = parameters.GetValue<Account>("Account");
-            _userAccount.TotalQuestionsAttempted += numQuestions;
+            _userAccount.TotalQuestionsAttempted += _numQuestions;
             _userAccount.TotalQuestionsCompleted += _numCorrect;
 
+            _score = parameters.GetValue<Score>("Score");
+
             Title = _topic.ToString() + " Results Page";
-            Results = string.Format("{0} correct out of {1} questions", _numCorrect, numQuestions);
+            Results = string.Format("{0} correct out of {1} questions", _numCorrect, _numQuestions);
         }
     }
 }

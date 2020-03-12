@@ -9,10 +9,14 @@
     <StackLayout BackgroundColor="{Binding Theme.BackgroundColor}">
         <StackLayout Orientation="Horizontal"
                      HorizontalOptions="FillAndExpand">
-            <Label Text="{Binding Title}"
+            <StackLayout HorizontalOptions="StartAndExpand">
+                <Label Text="{Binding Title}"
                    FontSize="Small"
-                   TextColor="{Binding Theme.TextColor}"
-                   HorizontalOptions="StartAndExpand"/>
+                   TextColor="{Binding Theme.TextColor}"/>
+                <Label Text="{Binding Statistic}"
+                       FontSize="Small"
+                       TextColor="{Binding Theme.TextColor}"/>
+            </StackLayout>
             <Button Text="Quit"
                     Command="{Binding QuitCommand}"
                     WidthRequest="60"

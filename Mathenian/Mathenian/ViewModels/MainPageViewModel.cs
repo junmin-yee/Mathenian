@@ -65,7 +65,7 @@ namespace Mathenian.ViewModels
         async void ExecuteSignOutCommand()
         {
             UserAccount.Completion = UserCompletion.GenerateForDatabase();
-            await App.Database.SaveItemAsync(UserAccount);
+            await App.Database.SaveAccountAsync(UserAccount);
             await _navigationService.NavigateAsync("/StartPage");
         }
 

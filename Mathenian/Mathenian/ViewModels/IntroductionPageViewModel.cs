@@ -23,6 +23,7 @@ namespace Mathenian.ViewModels
         private Topic _topic;
         private Mastery _mastery;
         private Account _userAccount;
+        private Score _score;
 
         public DelegateCommand LessonCommand { get; private set; }
         public DelegateCommand TestCommand { get; private set; }
@@ -40,11 +41,25 @@ namespace Mathenian.ViewModels
 
         async void ExecuteLessonCommand()
         {
+            _score = await App.Database.GetScoreByAttributes(0, (int)_topic, (int)_mastery);
+            if (_score == null)
+            {
+                _score = new Score()
+                {
+                    ID = 0,
+                    Type = 0,
+                    Topic = (int)_topic,
+                    Mastery = (int)_mastery,
+                    TotalCorrect = 0,
+                    TotalAttempt = 0
+                };
+            }
             var parameters = new NavigationParameters
             {
                 { "Topic", _topic },
                 { "Mastery", _mastery },
-                { "Account", _userAccount }
+                { "Account", _userAccount },
+                { "Score", _score }
             };
 
             await _navigationService.NavigateAsync("LessonPage", parameters);
@@ -52,11 +67,25 @@ namespace Mathenian.ViewModels
 
         async void ExecuteTestCommand()
         {
+            _score = await App.Database.GetScoreByAttributes(1, (int)_topic, (int)_mastery);
+            if (_score == null)
+            {
+                _score = new Score()
+                {
+                    ID = 0,
+                    Type = 1,
+                    Topic = (int)_topic,
+                    Mastery = (int)_mastery,
+                    TotalCorrect = 0,
+                    TotalAttempt = 0
+                };
+            }
             var parameters = new NavigationParameters
             {
                 { "Topic", _topic },
                 { "Mastery", _mastery },
-                { "Account", _userAccount }
+                { "Account", _userAccount },
+                { "Score", _score }
             };
 
             await _navigationService.NavigateAsync("TestPage", parameters);

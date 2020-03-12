@@ -28,13 +28,14 @@ namespace Mathenian.Models
             {
                 if (!Database.TableMappings.Any(m => m.MappedType.Name == typeof(Account).Name))
                 {
-                    await Database.CreateTablesAsync(CreateFlags.None, typeof(Account)).ConfigureAwait(false);
+                    await Database.CreateTableAsync(typeof(Account)).ConfigureAwait(false);
+                    await Database.CreateTableAsync(typeof(Score)).ConfigureAwait(false);
                     initialized = true;
                 }
             }
         }
 
-        public Task<List<Account>> GetItemsAsync()
+        public Task<List<Account>> GetAccountsAsync()
         {
             return Database.Table<Account>().ToListAsync();
         }
@@ -49,7 +50,7 @@ namespace Mathenian.Models
             return Database.Table<Account>().Where(i => i.Username == user && i.Password == pass).FirstOrDefaultAsync();
         }
 
-        public Task<int> SaveItemAsync(Account account)
+        public Task<int> SaveAccountAsync(Account account)
         {
             if (account.ID != 0)
             {
@@ -61,9 +62,41 @@ namespace Mathenian.Models
             }
         }
 
-        public Task<int> DeleteItemAsync(Account account)
+        public Task<int> DeleteAccountAsync(Account account)
         {
             return Database.DeleteAsync(account);
+        }
+
+        public Task<List<Score>> GetScoresAsync()
+        {
+            return Database.Table<Score>().ToListAsync();
+        }
+
+        public Task<Score> GetScoreByIdAsync(int id)
+        {
+            return Database.Table<Score>().Where(i => i.ID == id).FirstOrDefaultAsync();
+        }
+
+        public Task<Score> GetScoreByAttributes(int type, int topic, int mastery)
+        {
+            return Database.Table<Score>().Where(i => i.Type == type && i.Topic == topic && i.Mastery == mastery).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveScoreAsync(Score score)
+        {
+            if (score.ID != 0)
+            {
+                return Database.UpdateAsync(score);
+            }
+            else
+            {
+                return Database.InsertAsync(score);
+            }
+        }
+
+        public Task<int> DeleteScoreAsync(Score score)
+        {
+            return Database.DeleteAsync(score);
         }
     }
 }

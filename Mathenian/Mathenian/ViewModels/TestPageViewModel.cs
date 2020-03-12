@@ -21,6 +21,13 @@ namespace Mathenian.ViewModels
             set { SetProperty(ref _title, value); }
         }
 
+        private string _statistic;
+        public string Statistic
+        {
+            get => _statistic;
+            set { SetProperty(ref _statistic, value); }
+        }
+
         private string[] _questionSet = new string[NumQuestions];
         public string[] QuestionSet { get => _questionSet; set => _questionSet = value; }
 
@@ -53,6 +60,7 @@ namespace Mathenian.ViewModels
         private Topic _topic;
         private Mastery _mastery;
         private Account _userAccount;
+        private Score _score;
 
         private Color[] _colors = new Color[] { Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
                                                 Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray, Color.LightGray,
@@ -68,6 +76,7 @@ namespace Mathenian.ViewModels
         public TestPageViewModel(INavigationService navigationService, IPageDialogService dialogService)
         {
             Title = "Test";
+            Statistic = "";
             _navigationService = navigationService;
             _dialogService = dialogService;
             _theme = App.Theme;
@@ -112,6 +121,7 @@ namespace Mathenian.ViewModels
                     { "NumCorrect", NumAnswersCorrect },
                     { "NumQuestions", NumQuestions },
                     { "Topic", _topic },
+                    { "Score", _score },
                     { "Account", _userAccount }
                 };
 
@@ -137,8 +147,13 @@ namespace Mathenian.ViewModels
             _topic = parameters.GetValue<Topic>("Topic");
             _mastery = parameters.GetValue<Mastery>("Mastery");
             _userAccount = parameters.GetValue<Account>("Account");
+            _score = parameters.GetValue<Score>("Score");
 
             Title = string.Format("{0} {1} Test", _topic.ToString(), _mastery.ToString());
+            if (_score.TotalAttempt == 0)
+                Statistic = "Average score: 0%";
+            else
+                Statistic = string.Format("Average score: {0:0%}", (double)_score.TotalCorrect / _score.TotalAttempt);
 
             var factory = new QuestionSet().ExecuteCreate(_topic, NumQuestions, _mastery);
 

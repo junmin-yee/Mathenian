@@ -49,7 +49,7 @@ namespace Mathenian.ViewModels
                 IsDarkMode = 0
             };
 
-            await App.Database.SaveItemAsync(account);
+            await App.Database.SaveAccountAsync(account);
 
             account = await App.Database.GetAccountByCredentialAsync(Username, Hash(Password));
             App.Theme.UpdateTheme(0);
