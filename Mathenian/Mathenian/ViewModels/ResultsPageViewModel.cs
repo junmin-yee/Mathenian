@@ -2,17 +2,14 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Mathenian.ViewModels
 {
-	public class ResultsPageViewModel : BindableBase, INavigationAware
-	{
+    public class ResultsPageViewModel : BindableBase, INavigationAware
+    {
         private string _title;
-        public string Title 
-        { 
+        public string Title
+        {
             get => _title;
             set { SetProperty(ref _title, value); }
         }
@@ -34,7 +31,7 @@ namespace Mathenian.ViewModels
         private Score _score;
 
         public DelegateCommand NavigateCommand { get; private set; }
-        
+
         private readonly INavigationService _navigationService;
 
         public ResultsPageViewModel(INavigationService navigationService)

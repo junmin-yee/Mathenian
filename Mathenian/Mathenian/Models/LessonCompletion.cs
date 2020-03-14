@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading;
-using Xamarin.Forms;
-
-namespace Mathenian.Models
+﻿namespace Mathenian.Models
 {
     public class LessonCompletion
     {

@@ -2,9 +2,6 @@
 using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Mathenian.ViewModels
 {
@@ -23,11 +20,11 @@ namespace Mathenian.ViewModels
         public string DailyStreak { get => _dailyStreak; set { SetProperty(ref _dailyStreak, value); } }
 
         private bool _isDarkMode;
-        public bool IsDarkMode 
-        { 
+        public bool IsDarkMode
+        {
             get => _isDarkMode;
-            set 
-            { 
+            set
+            {
                 SetProperty(ref _isDarkMode, value);
                 if ((_userAccount.IsDarkMode != 0) != value)
                 {

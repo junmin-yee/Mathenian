@@ -1,10 +1,10 @@
-﻿using Prism;
-using Prism.Ioc;
+﻿using Mathenian.Models;
 using Mathenian.ViewModels;
 using Mathenian.Views;
+using Prism;
+using Prism.Ioc;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using Mathenian.Models;
 
 [assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace Mathenian
