@@ -125,6 +125,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[2]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Geometry"/>
             <Button Text="Series"
                     Grid.Row="6"
@@ -133,6 +134,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[3]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Series"/>
             <Button Text="Sets"
                     Grid.Row="6"
@@ -141,6 +143,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[6]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Sets"/>
             <Button Text="Differential"
                     Grid.Row="8"
@@ -149,6 +152,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[4]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Differential"/>
             <Button Text="Probability"
                     Grid.Row="8"
@@ -157,6 +161,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[7]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Probability"/>
             <Button Text="Integral"
                     Grid.Row="10"
@@ -165,6 +170,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[5]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Integral"/>
             <Button Text="Statistics"
                     Grid.Row="10"
@@ -173,6 +179,7 @@
                     WidthRequest="60"
                     CornerRadius="30"
                     BackgroundColor="{Binding ButtonColors[8]}"
+                    Command="{Binding NavigateCommand}"
                     CommandParameter="Statistics"/>
         </Grid>
     </ScrollView>

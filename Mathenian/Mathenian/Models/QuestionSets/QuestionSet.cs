@@ -24,7 +24,14 @@ namespace Mathenian.Models
             _factories = new Dictionary<Topic, QuestionSetFactory>
             {
                 { Topic.Arithmetic, new ArithmeticFactory() },
-                { Topic.Algebra, new AlgebraFactory() }
+                { Topic.Algebra, new AlgebraFactory() },
+                { Topic.Geometry, new GeometryFactory() },
+                { Topic.Series, new SeriesFactory() },
+                { Topic.Differential, new DifferentialFactory() },
+                { Topic.Integral, new IntegralFactory() },
+                { Topic.Sets, new SetsFactory() },
+                { Topic.Probability, new ProbabilityFactory() },
+                { Topic.Statistics, new StatisticsFactory() }
             };
         }
 
